@@ -7,3 +7,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py .
 ENV PORT=10000
 CMD gunicorn -w 2 -b 0.0.0.0:$PORT app:app
+RUN apt-get update && apt-get install -y libgl1 libglib2.0-0
