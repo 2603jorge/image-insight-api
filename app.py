@@ -66,7 +66,11 @@ def detect_barcodes(img: Image.Image):
     try:
         arr = np.array(img)[:, :, ::-1]
         decoded = pyzbar.decode(arr)
-        return [{"type": d.type, "data": d.data.decode("utf-8", errors="ignore"), "rect": {"x": d.rect.left, "y": d.rect.top, "w": d.rect.width, "h": d.rect.height}} for d in decoded]
+        return [{
+            "type": d.type,
+            "data": d.data.decode("utf-8", errors="ignore"),
+            "rect": {"x": d.rect.left, "y": d.rect.top, "w": d.rect.width, "h": d.rect.height}
+        } for d in decoded]
     except Exception:
         return []
 
@@ -78,6 +82,11 @@ def detect_faces(img: Image.Image):
         return {"count": len(faces), "boxes": [{"x": int(x), "y": int(y), "w": int(w), "h": int(h)} for (x, y, w, h) in faces]}
     except Exception as e:
         return {"count": 0, "error": str(e), "boxes": []}
+
+# --- Endpoint raíz para que no salga "Not Found"
+@app.get("/")
+def home():
+    return "API funcionando correctamente", 200
 
 @app.post("/analyze")
 def analyze():
