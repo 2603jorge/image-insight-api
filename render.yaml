@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: image-insight-api
+    env: docker
+    plan: free
+    autoDeploy: true
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 10000

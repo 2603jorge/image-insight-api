@@ -1,0 +1,14 @@
+.git
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.tmp
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.pdf
+.venv/
+.env
